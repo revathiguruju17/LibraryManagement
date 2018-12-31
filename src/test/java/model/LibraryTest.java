@@ -39,7 +39,6 @@ class LibraryTest {
     void shouldThrowAnExceptionIfTheUnAddedItemIsRemovedFromTheLibraryItems() {
         assertThrows(ItemNotFoundException.class, ()->{
             library.removeItem(item);
-        });
+        },"un added item cannot be removed");
     }
-
 }

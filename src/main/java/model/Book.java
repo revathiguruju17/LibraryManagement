@@ -12,4 +12,11 @@ public class Book implements Item {
     public void displayDetails(IO io) {
 
     }
+
+    @Override
+    public void update() {
+
+    }
+
+
 }

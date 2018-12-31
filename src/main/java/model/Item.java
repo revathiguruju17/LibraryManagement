@@ -6,4 +6,5 @@ public interface Item {
 
     void displayDetails(IO io);
 
+    void update();
 }

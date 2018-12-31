@@ -21,17 +21,28 @@ class LibrarianTest {
         librarian = new Librarian();
         borrower = Mockito.mock(Borrower.class);
         item = Mockito.mock(Book.class);
-        library.addItems(item);
     }
 
     @Test
-    void shouldIssueABookToTheUser() {
+    void shouldIssueABookWhenTheUserWantsToBorrowALibraryItem() {
+        library.addItems(item);
         librarian.issueAnItem(borrower, item, library);
         doNothing().when(borrower).addItem(isA(Item.class));
         doNothing().when(item).update();
         doNothing().when(library).removeItem(isA(Item.class));
         verify(borrower, times(1)).addItem(item);
-        verify(borrower,times(1)).addItem(item);
+        verify(item, times(1)).update();
         verify(library, times(1)).removeItem(item);
+    }
+
+    @Test
+    void shouldReturnALibraryItemWhenUserReturnsAnItem(){
+        librarian.returnAnItem(borrower,item,library);
+        doNothing().when(borrower).removeItem(isA(Item.class));
+        doNothing().when(item).update();
+        doNothing().when(library).addItems(isA(Item.class));
+        verify(borrower, times(1)).removeItem(item);
+        verify(item, times(1)).update();
+        verify(library, times(1)).addItems(item);
     }
 }

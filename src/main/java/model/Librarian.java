@@ -11,4 +11,10 @@ class Librarian extends Staff {
         borrower.addItem(item);
         item.update();
     }
+
+    public void returnAnItem(Borrower borrower, Item item, Library library) {
+        library.addItems(item);
+        borrower.removeItem(item);
+        item.update();
+    }
 }

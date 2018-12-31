@@ -7,4 +7,8 @@ class Borrower extends Person {
 
     void addItem(Item item) {
     }
+
+    void removeItem(Item item) {
+
+    }
 }

@@ -9,22 +9,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
     private Library library;
+    private Item item;
 
     @BeforeEach
     void init() {
         library = new Library();
+        item = Mockito.mock(Book.class);
     }
 
     @Test
     void shouldContainAnItemInTheItemListInLibraryWhichIsAdded() {
-        Item item = Mockito.mock(Book.class);
         library.addItems(item);
         assertTrue(library.searchItem(item));
     }
 
     @Test
     void shouldNotContainAnItemInLibraryItemsWhichIsNotAdded() {
-        Item item = Mockito.mock(Book.class);
         assertFalse(library.searchItem(item));
     }
+
+    @Test
+    void shouldRemoveTheGivenItemFromTheLibraryItems() {
+        library.addItems(item);
+        library.removeItem(item);
+        assertFalse(library.searchItem(item));
+    }
+
+    @Test
+    void shouldThrowAnExceptionIfTheUnAddedItemIsRemovedFromTheLibraryItems() {
+        assertThrows(ItemNotFoundException.class, ()->{
+            library.removeItem(item);
+        });
+    }
+
 }
